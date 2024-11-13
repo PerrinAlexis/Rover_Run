@@ -24,7 +24,7 @@ typedef struct s_root
 // Structure de l'arbre complet
 typedef struct s_tree
 {
-    t_root* tree;   // Référence à la racine de l'arbre
+    t_root* tree;   
 } t_tree;
 
 // Prototypes pour les fonctions de gestion de l'arbre
