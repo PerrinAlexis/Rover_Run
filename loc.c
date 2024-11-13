@@ -50,3 +50,6 @@ t_position DOWN(t_position pos)
     return new_pos;
 }
 
+t_position ROBOT(t_position pos){
+
+}

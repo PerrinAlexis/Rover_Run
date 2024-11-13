@@ -31,6 +31,8 @@ void calculateCosts(t_map);
  * @param map : the map
  * @return none
  */
+
+
 void removeFalseCrevasses(t_map);
 
 /* definition of local functions */

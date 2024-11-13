@@ -32,5 +32,7 @@ int main() {
         printf("\n");
     }
     displayMap(map);
+    calculateCosts(map);
+
     return 0;
 }
