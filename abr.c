@@ -1,6 +1,7 @@
 // permet de représenter et manipuler une séquence de mouvements en partant d'une position initiale
 #include "loc.h"
 #include "moves.h"
+#include "abr.h"
 
 #ifndef UNTITLED1_TREE_H
 #define UNTITLED1_TREE_H

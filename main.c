@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "map.h"
+#include"tirage.h"
 
 int main() {
     t_map map;
@@ -33,6 +34,8 @@ int main() {
     }
     displayMap(map);
     calculateCosts(map);
+    tab_mvmt_t *tab_mvm = create_tab();
+    display_tab_mv(tab_mvm);
 
     return 0;
 }
