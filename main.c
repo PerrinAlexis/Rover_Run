@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "map.h"
 #include"tirage.h"
+#include <time.h>
 
 int main() {
     t_map map;
@@ -34,8 +35,17 @@ int main() {
     }
     displayMap(map);
     calculateCosts(map);
+
+    // Tirage des moouvements
     tab_mvmt_t *tab_mvm = create_tab();
-    display_tab_mv(tab_mvm);
+    display_tab_mv(tab_mvm,7);
+
+    srand(time(NULL));
+    int num_draws = 9;
+    perform_draws(tab_mvm, 7, num_draws);
+    // Réinitialisation des disponibilités
+    reset_availabilities(tab_mvm, 7);
+
 
     return 0;
 }
