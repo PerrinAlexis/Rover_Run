@@ -27,6 +27,8 @@ typedef struct mvmt {
 tab_mvmt_t* create_tab();
 void display_tab_mv();
 int draw_movement();
-void perform_draws();
+char **perform_draws();
 void reset_availabilities();
+void display_tab_res();
+
 #endif //UNTITLED1_TIRAGE_H

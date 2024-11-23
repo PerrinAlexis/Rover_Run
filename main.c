@@ -41,11 +41,11 @@ int main() {
     display_tab_mv(tab_mvm,7);
 
     srand(time(NULL));
-    int num_draws = 9;
-    perform_draws(tab_mvm, 7, num_draws);
+    int num_draws = 4;
+    char* tab_res = perform_draws(tab_mvm, 9, num_draws);
     // Réinitialisation des disponibilités
     reset_availabilities(tab_mvm, 7);
-
-
+    // Affichage du tableau des 9 tirage
+    display_tab_res(tab_res,num_draws);
     return 0;
 }
