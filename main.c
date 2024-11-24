@@ -2,6 +2,7 @@
 #include "map.h"
 #include"tirage.h"
 #include <time.h>
+#include "loc.h"
 
 int main() {
     t_map map;
@@ -36,6 +37,17 @@ int main() {
     displayMap(map);
     calculateCosts(map);
 
+    // Initialise la position du robot
+    t_localisation robot = loc_init(5, 6, NORTH);
+    // Affichage de la localisation initiale du robot
+    printf("Robot initialisé à la position :\n");
+    printf("x : %d, y : %d, orientation : %s\n",
+           robot.pos.x,
+           robot.pos.y,
+           (robot.ori == NORTH) ? "NORTH" :
+           (robot.ori == EAST) ? "EAST" :
+           (robot.ori == SOUTH) ? "SOUTH" : "WEST");
+
     // Tirage des moouvements
     tab_mvmt_t *tab_mvm = create_tab();
     display_tab_mv(tab_mvm,7);
@@ -47,5 +59,8 @@ int main() {
     reset_availabilities(tab_mvm, 7);
     // Affichage du tableau des 9 tirage
     display_tab_res(tab_res,num_draws);
+
+
+
     return 0;
 }
