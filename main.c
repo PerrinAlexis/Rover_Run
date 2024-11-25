@@ -3,8 +3,15 @@
 #include"tirage.h"
 #include <time.h>
 #include "loc.h"
+#include"moves.h"
 
 int main() {
+
+    // demare le timer
+    clock_t start_time = clock();
+    clock_t build_time = clock(); // début de la fonction
+    clock_t search_time = clock(); // a mettre avant l'algo de recherche
+    clock_t path_time = clock(); // a mettre avant le chemin
     t_map map;
 
     // The following preprocessor directive checks if the code is being compiled on a Windows system.
@@ -49,16 +56,15 @@ int main() {
            (robot.ori == SOUTH) ? "SOUTH" : "WEST");
 
     // Tirage des moouvements
-    tab_mvmt_t *tab_mvm = create_tab();
-    display_tab_mv(tab_mvm,7);
-
-    srand(time(NULL));
-    int num_draws = 4;
-    char* tab_res = perform_draws(tab_mvm, 9, num_draws);
-    // Réinitialisation des disponibilités
-    reset_availabilities(tab_mvm, 7);
-    // Affichage du tableau des 9 tirage
-    display_tab_res(tab_res,num_draws);
+    t_move random_moves[9];
+    printf("Random moves list:\n");
+    for (int i = 0; i < 9; i++) {
+        random_moves[i] = getRandomMove();
+        printf("%s\n", getMoveAsString(random_moves[i]));
+    }
+    printf("Temps construction : %lf\n", (double)(build_time - start_time) / CLOCKS_PER_SEC);
+    printf("Temps recherche : %lf\n", (double)(search_time - build_time) / CLOCKS_PER_SEC);
+    printf("Temps calcul chemin : %lf\n", (double)(path_time - search_time) / CLOCKS_PER_SEC);
 
 
 

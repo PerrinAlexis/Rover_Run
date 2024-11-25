@@ -3,6 +3,7 @@
 //
 
 #include "moves.h"
+#include <stdlib.h>
 
 /* prototypes of local functions */
 /* local functions are used only in this file, as helper functions */
@@ -25,8 +26,7 @@ t_localisation translate(t_localisation , t_move);
 
 /* definition of local functions */
 
-t_orientation rotate(t_orientation ori, t_move move)
-{
+t_orientation rotate(t_orientation ori, t_move move) {
     int rst;
     switch (move)
     {
@@ -45,17 +45,13 @@ t_orientation rotate(t_orientation ori, t_move move)
     return (ori+rst)%4;
 }
 
-t_localisation translate(t_localisation loc, t_move move)
-{
+t_localisation translate(t_localisation loc, t_move move) {
     /** rules for coordinates:
      *  - x grows to the right with step of +1
      *  - y grows to the bottom with step of +1
      *  - the origin (x=0, y=0) is at the top left corner
      */
     t_position res = loc.pos;
-    res.x =loc.pos.x;
-    res.y = loc.pos.y;
-
     switch (move) {
         case F_10:
             switch (loc.ori) {
@@ -132,27 +128,54 @@ t_localisation translate(t_localisation loc, t_move move)
         default:
             break;
     }
-        return loc_init(res.x, res.y, loc.ori);
+    t_localisation newLoc;
+    newLoc.ori = loc.ori;
+    newLoc.pos = res;
+    return newLoc;
 
 }
 
 /* definitions of exported functions */
 
-char *getMoveAsString(t_move move)
-{
+char *getMoveAsString(t_move move) {
     return _moves[move];
 }
 
-t_localisation move(t_localisation loc, t_move move)
-{
+
+// fix from original new_loc.ori = rotate(loc.ori, move); (wasn't updating the orientation)
+t_localisation move(t_localisation loc, t_move move) {
     t_localisation new_loc;
-    new_loc.ori = rotate(loc.ori, move);
+    loc.ori = rotate(loc.ori, move);
     new_loc = translate(loc, move);
     return new_loc;
 }
 
-void updateLocalisation(t_localisation *p_loc, t_move m)
-{
+void updateLocalisation(t_localisation *p_loc, t_move m) {
     *p_loc = move(*p_loc, m);
     return;
+}
+
+
+/***************************************************************/
+/*                     MODIFIED PART                           */
+/***************************************************************/
+
+static int moves[] = {22, 15, 7, 7, 21, 21, 7};
+static int total_moves = 100;
+static const int NUM_MOVES = 7;
+
+t_move getRandomMove() {
+    if (total_moves <= 0) return -1;
+    int r = rand() % total_moves;
+    int type = 0;
+
+    while (type < NUM_MOVES+1 && r >= moves[type]) {
+        r -= moves[type];
+        type++;
+    }
+
+    if (type >= NUM_MOVES+1) return -1;
+    moves[type]--;
+    total_moves--;
+    return (t_move)type;
 }
