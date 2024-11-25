@@ -9,9 +9,9 @@ int main() {
 
     // demare le timer
     clock_t start_time = clock();
-    clock_t build_time = clock(); // début de la fonction
-    clock_t search_time = clock(); // a mettre avant l'algo de recherche
-    clock_t path_time = clock(); // a mettre avant le chemin
+    clock_t build_time = clock(); // début de la fonction ca tu touche pas
+    clock_t search_time = clock(); // a mettre avant l'algo de recherche, création de l'arbre avant de créer l'arbre dans le main
+    clock_t path_time = clock(); // a mettre avant le chemin avant de choisir le meilleur chemin pour notre robot
     t_map map;
 
     // The following preprocessor directive checks if the code is being compiled on a Windows system.
