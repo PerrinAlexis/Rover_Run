@@ -55,5 +55,6 @@ t_map createMapFromFile(char *);
  */
 void displayMap(t_map);
 void calculateCosts(t_map);
+t_map createNewMap();
 
 #endif //UNTITLED1_MAP_H

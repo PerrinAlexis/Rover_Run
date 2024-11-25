@@ -303,3 +303,45 @@ void displayMap(t_map map)
     }
     return;
 }
+t_map createNewMap(t_map original_map)
+{
+    t_map new_map;
+    // Copy dimensions
+    new_map.x_max = original_map.x_max;
+    new_map.y_max = original_map.y_max;
+
+    // Allocate memory for the soils and costs
+    new_map.soils = (t_soil **)malloc(new_map.y_max * sizeof(t_soil *));
+    new_map.costs = (int **)malloc(new_map.y_max * sizeof(int *));
+    for (int i = 0; i < new_map.y_max; i++)
+    {
+        new_map.soils[i] = (t_soil *)malloc(new_map.x_max * sizeof(t_soil));
+        new_map.costs[i] = (int *)malloc(new_map.x_max * sizeof(int));
+    }
+
+    // Copy the contents of the original map
+    for (int i = 0; i < new_map.y_max; i++)
+    {
+        for (int j = 0; j < new_map.x_max; j++)
+        {
+            new_map.soils[i][j] = original_map.soils[i][j]; // Copy soil type
+            new_map.costs[i][j] = original_map.costs[i][j]; // Copy cost
+        }
+    }
+
+    // Example: Modify the new map (e.g., add more crevasses or change some plains to regolith)
+    for (int i = 0; i < new_map.y_max; i++)
+    {
+        for (int j = 0; j < new_map.x_max; j++)
+        {
+            // Example modification: Turn some plains into crevasses for testing
+            if (new_map.soils[i][j] == PLAIN && (i + j) % 5 == 0)
+            {
+                new_map.soils[i][j] = CREVASSE;
+                new_map.costs[i][j] = COST_UNDEF; // Update cost for new crevasse
+            }
+        }
+    }
+
+    return new_map;
+}
